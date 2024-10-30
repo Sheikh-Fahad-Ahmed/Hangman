@@ -26,5 +26,17 @@ class Game
     puts 'You get 11 tries'
   end
 
-
+  def game_loop
+    guesses = 11
+    until guesses == 0
+      choice_message
+      choice = gets.chomp.downcase
+      until choice.match(/^[a-z]$/)
+        wrong_choice
+        choice_message
+        choice = gets.chomp.downcase
+      end
+      
+    end
+  end
 end
