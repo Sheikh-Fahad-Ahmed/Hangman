@@ -24,4 +24,13 @@ module Display
   def wrong_choice
     puts 'You can only enter 1 letter'
   end
+
+  def lost
+    puts "\n\tYou ran out of guesses..\n\tYou have lost..\n\tThank you for playing!"
+  end
+
+  def won
+    puts "\n\tCongradualtions!!\n\tYou have guessed the secret word\n\tYou win!!\n\tThank you for playing!"
+    exit(0)
+  end
 end

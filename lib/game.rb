@@ -52,10 +52,11 @@ class Game
   def game_loop
     until guesses.zero?
       puts "\n======================================="
-      puts "Your board:"
+      puts 'Your board:'
       puts board.join(' ')
       puts "\nYour guessed letters:"
       puts guessed_letters.join(' ')
+      puts "\nYou have #{guesses} guesses"
       puts "\n#{choice_message}"
       choice = gets.chomp.downcase
       until choice.match(/^[a-z]$/)
@@ -64,9 +65,9 @@ class Game
         choice = gets.chomp.downcase
       end
       check_choice(choice)
-      break if check_board
-
       puts "=======================================\n"
+      won if check_board
     end
+    lost
   end
 end
