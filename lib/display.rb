@@ -6,7 +6,7 @@ module Display
   end
 
   def choice_message
-    puts 'guess a letter: '
+    'Guess a letter: '
   end
 
   def list_of_guesses
