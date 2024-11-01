@@ -1,0 +1,20 @@
+---
+:secret_word: listprice
+:player: fahad
+:guesses: 8
+:guessed_letters:
+- a
+- g
+- l
+- "n"
+- i
+:board:
+- l
+- i
+- _
+- _
+- _
+- _
+- i
+- _
+- _

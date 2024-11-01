@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'yaml'
 require_relative 'secret_word'
 require_relative 'display'
 
@@ -17,10 +18,32 @@ class Game
     @board = Array.new(secret_word.length) { '_' }
   end
 
-  def display
-    p secret_word
-    p player
-    p board
+  def save_game
+    yaml = YAML.dump({
+                       secret_word: @secret_word,
+                       player: @player,
+                       guesses: @guesses,
+                       guessed_letters: @guessed_letters,
+                       board: @board
+                     })
+    File.open('save_file.txt', 'w') do |file|
+      file.write(yaml)
+    end
+  end
+
+  def load_game
+    if File.exist?('save_file.txt')
+      File.open('save_file.txt', 'r') do |file|
+        yaml = YAML.load(file.read)
+        @secret_word = yaml[:secret_word]
+        @guesses = yaml[:guesses]
+        @board = yaml[:board]
+        @guessed_letters = yaml[:guessed_letters]
+        @player = yaml[:player]
+      end
+    else
+      puts 'You do not have any saved progress'
+    end
   end
 
   def game_start
@@ -30,6 +53,13 @@ class Game
   end
 
   def check_choice(choice)
+    if choice == '1'
+      save_game
+      return
+    elsif choice == '2'
+      load_game
+      return
+    end
     if guessed_letters.include?(choice)
       letter_guessed
     else
@@ -52,6 +82,7 @@ class Game
   def game_loop
     until guesses.zero?
       puts "\n======================================="
+      puts 'Press 1 for save, Press 2 for load'
       puts 'Your board:'
       puts board.join(' ')
       puts "\nYour guessed letters:"
@@ -59,7 +90,7 @@ class Game
       puts "\nYou have #{guesses} guesses"
       puts "\n#{choice_message}"
       choice = gets.chomp.downcase
-      until choice.match(/^[a-z]$/)
+      until choice.match(/^[a-z12]$/)
         wrong_choice
         choice_message
         choice = gets.chomp.downcase
