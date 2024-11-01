@@ -15,7 +15,7 @@ Welcome to Hangman, a simple word-guessing game built using Ruby for the command
 ## How to Play
 
 1. Clone this repository to your local machine.
-2. Ensure Ruby is installed on your system. If not, download and install it from here.
+2. Ensure Ruby is installed on your system.
 3. Navigate to the project directory in your terminal.
 4. Run the game by typing:
 ```
